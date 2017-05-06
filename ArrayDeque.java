@@ -10,8 +10,8 @@ public class ArrayDeque<Item> {
 
     public ArrayDeque(){
         items = (Item[]) new Object[8];
-        nextFirst = 4;
-        nextLast= 5;
+        nextFirst = 3;
+        nextLast= 4;
         size = 0;
     }
 
@@ -24,9 +24,9 @@ public class ArrayDeque<Item> {
         items[nextFirst] = i;
 
         if ( nextFirst == 0){
-            nextLast = capacity() - 1;
+            nextFirst = capacity() - 1;
         }else {
-            nextLast--;
+            nextFirst--;
         }
 
         size++;
@@ -83,7 +83,7 @@ public class ArrayDeque<Item> {
      */
     public void printDeque(){
         for(Item i:items){
-            System.out.print(i + " ");
+            if (i != null)System.out.print(i + " ");
         }
     }
 
@@ -100,7 +100,7 @@ public class ArrayDeque<Item> {
         }else{
             nextFirst++;
         }
-
+        size--;
         Item i = items[nextFirst];
         items[nextFirst] = null;
         return i;
@@ -118,7 +118,7 @@ public class ArrayDeque<Item> {
         }else{
             nextLast--;
         }
-
+        size--;
         Item i = items[nextLast];
         items[nextLast] = null;
         return i;
@@ -130,7 +130,9 @@ public class ArrayDeque<Item> {
       returns null. Must not alter the deque!
     */
     public Item get(int index){
-        if (index > size() - 1 || index < 0 ) return null;
+        if (index > size() - 1 || index < 0 ) {
+            return null;
+        }
         if( nextFirst < nextLast){
             return items[nextFirst + index + 1];
         }else{
@@ -140,6 +142,13 @@ public class ArrayDeque<Item> {
                 return items[index - (capacity() + nextFirst + 1)];
             }
         }
+    }
+
+    public static void main ( String[] args){
+        ArrayDeque<Integer> array = new ArrayDeque<>();
+        array.addFirst(1);
+//        array.printDeque();
+        System.out.println(array.get(0));
     }
 
 }
