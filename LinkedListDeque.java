@@ -22,10 +22,10 @@ public class LinkedListDeque<Item> {
     }
 
     // the head and tail to the linkedlist
-    public Node sentinel;
+    private Node sentinel;
 
     // the size of the linked list
-    public int size;
+    private int size;
 
     // creates an empty linkedlist
     public LinkedListDeque(){
